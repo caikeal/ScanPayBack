@@ -133,7 +133,7 @@ class OrderService extends BaseService
             Payment::create([
                 'payment_no' => $paymentNo,
                 'trade_order_no' => $params['order']->order_no,
-                'channel' => Payment::WECHAT_PAYMENAT_CHANNEL,
+                'channel' => Payment::WECHAT_SCAN_PAYMENAT_CHANNEL,
                 'amount_receivable' => $params['order']->amount_receivable * 100,
                 'failed_reason' => $wxPaymentInfo['return_msg'],
                 'status' => Payment::FAILED,
@@ -195,7 +195,7 @@ class OrderService extends BaseService
         $payment = Payment::create([
             'payment_no' => $paymentNo,
             'trade_order_no' => $params['order']->order_no,
-            'channel' => Payment::WECHAT_PAYMENAT_CHANNEL,
+            'channel' => Payment::WECHAT_SCAN_PAYMENAT_CHANNEL,
             'transaction_no' => $wxPaymentInfo['transaction_id'],
             'amount_receivable' => $params['order']->amount_receivable * 100,
             'received_amount' => $wxPaymentInfo['total_fee'],
@@ -248,10 +248,10 @@ class OrderService extends BaseService
         }
 
         switch ($payment->channel) {
-            case Payment::WECHAT_PAYMENAT_CHANNEL:
+            case Payment::WECHAT_SCAN_PAYMENAT_CHANNEL:
                 $order = $this->checkWxPayment($order, $payment, $company);
                 break;
-            case Payment::ALI_PAYMENAT_CHANNEL:
+            case Payment::ALI_SCAN_PAYMENAT_CHANNEL:
                 $order = $this->checkAliPayment($order, $payment, $company);
                 break;
             default:

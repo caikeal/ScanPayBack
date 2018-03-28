@@ -107,4 +107,9 @@ class Order extends Model
     {
         return $this->hasMany(Payment::class, 'trade_order_no', 'order_no');
     }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }
