@@ -19,7 +19,7 @@ class Order extends Model
     const CANCELLED_BY_MERCHANT = 'MERCHANT';           // 商家手动关闭
 
     const PAYMENT_CHANNEL_WECHAT_PAY = 'WECHAT_PAY';
-
+    const PAYMENT_CHANNEL_ALIPAY = 'ALIPAY';
 
     const STATUS_MAP = [
         self::STATUS_WAIT_PAY           => '待支付',
@@ -101,5 +101,10 @@ class Order extends Model
         /* 如果有重复的，则重新生成 */
 
         return self::generateOrderNo();
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'trade_order_no', 'order_no');
     }
 }

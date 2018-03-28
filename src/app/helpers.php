@@ -177,7 +177,7 @@ if (!function_exists('payment_log')) {
             new \Monolog\Handler\StreamHandler(storage_path('logs/'.$logger->getName().'.log'))
         );
 
-        $logger->debug(get_class($this), $array);
+        $logger->debug('payment', $array);
     }
 }
 

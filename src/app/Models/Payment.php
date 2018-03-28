@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class Payment extends Model
 {
     const WECHAT_PAYMENAT_CHANNEL = 'WECHAT_PAY';
+    const ALI_PAYMENAT_CHANNEL = 'ALIPAY';
 
     const PROCESSING = 'PROCESSING';
     const SUCCEEDED = 'SUCCEEDED';

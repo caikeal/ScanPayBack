@@ -25,7 +25,7 @@ class OrderRequest extends FormRequest
     {
         return [
             'auth_code' => ['required'],
-            'amount' => ['required', 'numeric', 'min:0', 'not_in:0', 'max:100000000'],
+            'amount' => ['required', 'numeric', 'min:0', 'not_in:0', 'max:100000000', 'regex:/^[0-9]+\.[0-9]{1,2}$/'],
         ];
     }
 
@@ -38,6 +38,7 @@ class OrderRequest extends FormRequest
             'amount.min' => '金额必须大于0',
             'amount.not_in' => '金额必须大于0',
             'amount.max' => '金额超过在线支付允许上限',
+            'amount.regex' => '金额超过格式错误',
         ];
     }
 }

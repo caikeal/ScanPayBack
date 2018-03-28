@@ -32,5 +32,8 @@ Route::group(['middleware' => 'auth.miniprogram'], function () {
 
         // 扫码下单
         Route::post('scan_order', 'OrderController@scanOrder');
+        // 获取订单支付状态
+        Route::get('check_pay/{order_no}', 'OrderController@checkPay');
+        
     });
 });
