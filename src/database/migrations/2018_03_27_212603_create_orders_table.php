@@ -15,8 +15,9 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->string('order_no')->comment('订单编号')->primary();
-            $table->unsignedInteger('customer_id')->comment('客户 ID')->index();
-            $table->unsignedInteger('invoice_log_id')->default(0)->comment('发票记录 ID')->index();
+            $table->string('customer_str')->nullable()->comment('客户 ID');
+            $table->unsignedInteger('created_user_id')->comment('创建者 ID')->index();
+            $table->unsignedInteger('company_id')->comment('企业 ID')->index();
             $table->string('title')->comment('订单标题');
             $table->string('receiver_name')->nullable()->comment('收货人姓名');
             $table->string('receiver_mobile')->nullable()->comment('收货人手机号');
@@ -30,6 +31,7 @@ class CreateOrdersTable extends Migration
             $table->string('express_company_name')->nullable()->comment('物流公司名称');
             $table->string('express_number')->nullable()->comment('物流编号');
             $table->string('payment_channel')->nullable()->comment('支付渠道，WECHAT_PAY');
+            $table->decimal('total_amount')->default(0.00)->comment('总额');
             $table->decimal('reduce_amount')->default(0.00)->comment('优惠总额');
             $table->decimal('amount_receivable')->default(0.00)->comment('应收总额');
             $table->decimal('received_amount')->default(0.00)->comment('实收总额');
@@ -40,6 +42,7 @@ class CreateOrdersTable extends Migration
             $table->string('cancelled_type')->nullable()->comment('订单关闭方式：NOT_PAID 超时未支付关闭，MEMBER 会员手动关闭，MERCHANT 商家手动关闭');
             $table->string('status')->nullable()->comment('订单状态：WAIT_PAY, WAIT_SEND_GOODS, WAIT_CONFIRM_GOODS, COMPLETED, CANCELLED');
             $table->text('comment')->nullable()->comment('备注');
+            $table->boolean('is_unpaid_notified')->default(0)->comment('订单未支付是否已提醒');
             $table->timestamps();
         });
     }
