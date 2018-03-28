@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('company_id')->index()->comment('企业ID');
             $table->string('wx_open_id')->nullable()->comment('wx open id');
+            $table->string('wx_session_key')->nullable()->comment('wx session key');
             $table->string('name')->nullable()->comment('姓名');
             $table->string('mobile')->comment('手机号');
             $table->string('role')->default('ADMIN')->comment('角色:ADMIN,STAFF');

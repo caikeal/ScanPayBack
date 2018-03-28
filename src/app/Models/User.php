@@ -20,6 +20,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'wx_open_id',
+        'wx_session_key',
         'company_id',
         'name',
         'mobile',

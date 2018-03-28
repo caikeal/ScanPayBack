@@ -13,6 +13,24 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// ===========================
+// 非登录
+// ===========================
+// 登录
+Route::post('/login', 'AuthController@login')->name('login');
+
+// 注册
+Route::post('/register', 'AuthController@register')->name('register');
+
+// ===========================
+// 登录
+// ===========================
+Route::group(['middleware' => 'auth.miniprogram'], function () {
+
+    // 订单
+    Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
+
+        // 扫码下单
+        Route::post('scan_order', 'OrderController@scanOrder');
+    });
 });

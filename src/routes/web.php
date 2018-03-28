@@ -14,5 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::post('/scan_order', 'OrderController@scanOrder');
